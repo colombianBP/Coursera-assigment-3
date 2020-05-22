@@ -1,7 +1,7 @@
 # Coursera-assigment-3
 Repo for the peer reviwed asigment of the getting and cleaning data course
 
-Data download and unzipp, first working on `test` file
+Data download and unzipp, first working on `test/` file
 ```
 {
   download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip','dataset.zip')
@@ -42,7 +42,7 @@ Reading and parsing observations
   data<-lapply(archivo,trimmer)
 }
 ```
-Raking readable names for the files on 'Internal Signals'
+Raking readable names for the files on `Internal Signals/`
 ```
 {
   filenames<-list.files('./Inertial Signals')
@@ -111,7 +111,7 @@ Organizing test data on a dataframe
                         observation=I(data))
 }
 ```
-Repeting the process for the 'train/' folder
+Repeting the process for the `train/` folder
 ```
 {
   setwd('./../train')
