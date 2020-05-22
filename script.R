@@ -182,19 +182,50 @@ rm(list=list)
 dataframe2<-data.frame(subjectid=dataframe$subjectid,
                       activity=dataframe$activity,
                       datatype=dataframe$datatype,
-                      dodyaccxmean=sapply(dataframe$bodyaccx,function(x) mean(x[[1]])),
-                      dodyaccymean=sapply(dataframe$bodyaccy,function(x) mean(x[[1]])),
-                      dodyacczmean=sapply(dataframe$bodyaccz,function(x) mean(x[[1]])),
-                      dodyaccxsd=sapply(dataframe$bodyaccx,sd),
-                      dodyaccysd=sapply(dataframe$bodyaccy,sd),
-                      dodyacczsd=sapply(dataframe$bodyaccz,sd),
-                      dodygyroxmean=sapply(dataframe$bodygyrox,function(x) mean(x[[1]])),
-                      dodygyroymean=sapply(dataframe$bodygyroy,function(x) mean(x[[1]])),
-                      dodygyrozmean=sapply(dataframe$bodygyroz,function(x) mean(x[[1]])),
-                      dodygyroxsd=sapply(dataframe$bodygyrox,sd),
-                      dodygyroysd=sapply(dataframe$bodygyroy,sd),
-                      dodygyrozsd=sapply(dataframe$bodygyroz,sd),
+                      bodyaccxmean=sapply(dataframe$bodyaccx,function(x) mean(x[[1]])),
+                      bodyaccymean=sapply(dataframe$bodyaccy,function(x) mean(x[[1]])),
+                      bodyacczmean=sapply(dataframe$bodyaccz,function(x) mean(x[[1]])),
+                      bodyaccxsd=sapply(dataframe$bodyaccx,sd),
+                      bodyaccysd=sapply(dataframe$bodyaccy,sd),
+                      bodyacczsd=sapply(dataframe$bodyaccz,sd),
+                      bodygyroxmean=sapply(dataframe$bodygyrox,function(x) mean(x[[1]])),
+                      bodygyroymean=sapply(dataframe$bodygyroy,function(x) mean(x[[1]])),
+                      bodygyrozmean=sapply(dataframe$bodygyroz,function(x) mean(x[[1]])),
+                      bodygyroxsd=sapply(dataframe$bodygyrox,sd),
+                      bodygyroysd=sapply(dataframe$bodygyroy,sd),
+                      bodygyrozsd=sapply(dataframe$bodygyroz,sd),
                       observationmean=sapply(dataframe$observation,function(x) mean(x[[1]])),
                       observationsd=sapply(dataframe$observation,sd))
 
+#To make a final dataframe, with the mean of each measurement, per subject and 
+#activity, we first make a list of measurements, to then calculate the mean
+
+values<-c("bodyaccxmean","bodyaccymean","bodyacczmean","bodygyroxmean","bodygyroymean",
+          "bodygyrozmean","observationmean")
+
+#we initialice the vectors that will make the columns of the dataframe
+subjectid=vector(mode='numeric')
+activity=vector(mode='character')
+measure=vector(mode='character')
+measuremean=vector(mode='numeric')
+
+
+counter<-1
+for(value in values){
+  #here wa make a matrix that holds the mean of the measurement  for each activity(row)
+  #and each subject(column)
+  matrix<-tapply(dataframe2[,value], list(dataframe2$activity,dataframe2$subjectid), mean)
+  for(id in colnames(matrix)){
+    for(act in rownames(matrix)){
+      #and put each value on its respective vector
+      subjectid[counter]<-as.numeric(id)
+      activity[counter]<-act
+      measure[counter]<-value
+      measuremean[counter]<-matrix[act,id]
+      counter<-counter+1
+    }
+  }
+}
+#And finally use them to make the dataframe
+dataframe3<-data.frame(subjectid=subjectid,activity=activity,measure=measure,measuremean=measuremean)
 
