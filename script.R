@@ -167,7 +167,34 @@ dataframe2<-data.frame(subjectid=subject,
                       observation=I(data))
 
 #Finally, we merge the two dataframes 
-dataframe3<-rbind(dataframe,dataframe2)
+dataframe<-rbind(dataframe,dataframe2)
 
+#As we only need dataframe3 all other objects in the enviroment 
+#will be errased
+list<-ls(all.names = T)
+list<-list[!(list %in% 'dataframe')]
+rm(list=list)
+
+#the data we have is already organiced and tidy, but its hard to see 
+#when many of our columns hold long vectors; a new one will be made 
+#in which these columns hold the mean or standard deviation
+
+dataframe2<-data.frame(subjectid=dataframe3$subjectid,
+                      activity=dataframe3$activity,
+                      datatype=dataframe3$datatype,
+                      dodyaccxmean=sapply(dataframe3$bodyaccx,function(x) mean(x[[1]])),
+                      dodyaccymean=sapply(dataframe3$bodyaccy,function(x) mean(x[[1]])),
+                      dodyacczmean=sapply(dataframe3$bodyaccz,function(x) mean(x[[1]])),
+                      dodyaccxsd=sapply(dataframe3$bodyaccx,sd),
+                      dodyaccysd=sapply(dataframe3$bodyaccy,sd),
+                      dodyacczsd=sapply(dataframe3$bodyaccz,sd),
+                      dodygyroxmean=sapply(dataframe3$bodygyrox,function(x) mean(x[[1]])),
+                      dodygyroymean=sapply(dataframe3$bodygyroy,function(x) mean(x[[1]])),
+                      dodygyrozmean=sapply(dataframe3$bodygyroz,function(x) mean(x[[1]])),
+                      dodygyroxsd=sapply(dataframe3$bodygyrox,sd),
+                      dodygyroysd=sapply(dataframe3$bodygyroy,sd),
+                      dodygyrozsd=sapply(dataframe3$bodygyroz,sd),
+                      observationmean=sapply(dataframe3$observation,function(x) mean(x[[1]])),
+                      observationsd=sapply(dataframe3$observation,sd))
 
 
