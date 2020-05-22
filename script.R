@@ -179,22 +179,22 @@ rm(list=list)
 #when many of our columns hold long vectors; a new one will be made 
 #in which these columns hold the mean or standard deviation
 
-dataframe2<-data.frame(subjectid=dataframe3$subjectid,
-                      activity=dataframe3$activity,
-                      datatype=dataframe3$datatype,
-                      dodyaccxmean=sapply(dataframe3$bodyaccx,function(x) mean(x[[1]])),
-                      dodyaccymean=sapply(dataframe3$bodyaccy,function(x) mean(x[[1]])),
-                      dodyacczmean=sapply(dataframe3$bodyaccz,function(x) mean(x[[1]])),
-                      dodyaccxsd=sapply(dataframe3$bodyaccx,sd),
-                      dodyaccysd=sapply(dataframe3$bodyaccy,sd),
-                      dodyacczsd=sapply(dataframe3$bodyaccz,sd),
-                      dodygyroxmean=sapply(dataframe3$bodygyrox,function(x) mean(x[[1]])),
-                      dodygyroymean=sapply(dataframe3$bodygyroy,function(x) mean(x[[1]])),
-                      dodygyrozmean=sapply(dataframe3$bodygyroz,function(x) mean(x[[1]])),
-                      dodygyroxsd=sapply(dataframe3$bodygyrox,sd),
-                      dodygyroysd=sapply(dataframe3$bodygyroy,sd),
-                      dodygyrozsd=sapply(dataframe3$bodygyroz,sd),
-                      observationmean=sapply(dataframe3$observation,function(x) mean(x[[1]])),
-                      observationsd=sapply(dataframe3$observation,sd))
+dataframe2<-data.frame(subjectid=dataframe$subjectid,
+                      activity=dataframe$activity,
+                      datatype=dataframe$datatype,
+                      dodyaccxmean=sapply(dataframe$bodyaccx,function(x) mean(x[[1]])),
+                      dodyaccymean=sapply(dataframe$bodyaccy,function(x) mean(x[[1]])),
+                      dodyacczmean=sapply(dataframe$bodyaccz,function(x) mean(x[[1]])),
+                      dodyaccxsd=sapply(dataframe$bodyaccx,sd),
+                      dodyaccysd=sapply(dataframe$bodyaccy,sd),
+                      dodyacczsd=sapply(dataframe$bodyaccz,sd),
+                      dodygyroxmean=sapply(dataframe$bodygyrox,function(x) mean(x[[1]])),
+                      dodygyroymean=sapply(dataframe$bodygyroy,function(x) mean(x[[1]])),
+                      dodygyrozmean=sapply(dataframe$bodygyroz,function(x) mean(x[[1]])),
+                      dodygyroxsd=sapply(dataframe$bodygyrox,sd),
+                      dodygyroysd=sapply(dataframe$bodygyroy,sd),
+                      dodygyrozsd=sapply(dataframe$bodygyroz,sd),
+                      observationmean=sapply(dataframe$observation,function(x) mean(x[[1]])),
+                      observationsd=sapply(dataframe$observation,sd))
 
 
