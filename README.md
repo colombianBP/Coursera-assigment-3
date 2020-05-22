@@ -8,6 +8,9 @@ repo for the peer reviwed asigment of the getting and cleaning data course
 ## Original data description
 Collected using a smartphonephone ((Samsung Galaxy S II) on the waist), of different subjects between 19-48 years old performing six different activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING).
 
-## Data analisis
+## Data analysis and description
 A simple organization and summary of the original data was performed, the first dataframe provided holds the mean and standard deviation of each individual measurement, acc meaning acceleraton, x,y,z giving the 3 components of direccion and sd stands for standard deviation,
 datatype is the divition on test and training sets done by the original authors.
+
+# Code description
+A full explanation on how `run_analysis.R` works is provided in `codebook.md`
