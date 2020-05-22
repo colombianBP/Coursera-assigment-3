@@ -228,4 +228,5 @@ for(value in values){
 }
 #And finally use them to make the dataframe
 dataframe3<-data.frame(subjectid=subjectid,activity=activity,measure=measure,measuremean=measuremean)
+dataframe3
 
