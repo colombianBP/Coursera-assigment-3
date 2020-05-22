@@ -1,23 +1,23 @@
 # Coursera-assigment-3
 Repo for the peer reviwed asigment of the getting and cleaning data course
 
-Data download and unzipp, first working on 'test' file
-'''
+Data download and unzipp, first working on `test` file
+```
 {
   download.file('https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip','dataset.zip')
   unzip('dataset.zip')
   setwd('./UCI HAR Dataset/test')
 }
-'''
+```
 Reading labels and subject
-'''
+```
 }
   labels<-scan('y_test.txt')
   subject<-scan('subject_test.txt')
 }
-'''
+```
 A function for reading and parsing data
-'''
+```
 {
   trimmer<-function(x){
     splited<-strsplit(x,' ')[[1]]
@@ -32,18 +32,18 @@ A function for reading and parsing data
     vec
   }
 }
-'''
+```
 Reading and parsing observations
-'''
+```
 }
   con<-file('X_test.txt')
   archivo<-readLines(con)
   close(con)
   data<-lapply(archivo,trimmer)
 }
-'''
+```
 Raking readable names for the files on 'Internal Signals'
-'''
+```
 {
   filenames<-list.files('./Inertial Signals')
   filenames2<-vector(mode = 'character')
@@ -56,9 +56,9 @@ Raking readable names for the files on 'Internal Signals'
     counter<-counter+1
   }
 {
-'''
+```
 Reading each file in Inertial Signals, transforming it into an integer vector list and saving that list as its respective value
-'''
+```
 {
   for(i in seq(1:9)){
     con<-file(paste0('./Inertial Signals','/',filenames[i]))
@@ -68,9 +68,9 @@ Reading each file in Inertial Signals, transforming it into an integer vector li
     assign(filenames2[i],datos)
   }
 }
-'''
+```
 Making explicit labels
-'''
+```
 {
   labels2<-vector(mode='character')
   counter=1
@@ -95,9 +95,9 @@ Making explicit labels
     counter<-counter+1
   }
 }
-'''
+```
 Organizing test data on a dataframe
-'''
+```
 {
   dataframe<-data.frame(subjectid=subject,
                         activity=labels2,
@@ -110,9 +110,9 @@ Organizing test data on a dataframe
                         datatype=rep('test',length(labels2)),
                         observation=I(data))
 }
-'''
+```
 Repeting the process for the 'train/' folder
-'''
+```
 {
   setwd('./../train')
 
@@ -178,23 +178,23 @@ Repeting the process for the 'train/' folder
                         datatype=rep('train',length(labels2)),
                         observation=I(data))
 }
-'''
+```
 Making a joined dataframe
-'''
+```
 {
   dataframe<-rbind(dataframe,dataframe2)
 }
-'''
+```
 Errasing all othe variables (except the main dataframe)
-'''
+```
 {
   list<-ls(all.names = T)
   list<-list[!(list %in% 'dataframe')]
   rm(list=list)
 }
-'''
+```
 Making a dataframe that holds the means and standard deviations of each measurement
-'''
+```
 {
   dataframe2<-data.frame(subjectid=dataframe$subjectid,
                         activity=dataframe$activity,
@@ -214,10 +214,10 @@ Making a dataframe that holds the means and standard deviations of each measurem
                         observationmean=sapply(dataframe$observation,function(x) mean(x[[1]])),
                         observationsd=sapply(dataframe$observation,sd))
 }
-'''
+```
 Initializing vectors that will construct the final dataframe of means for each measurement, per subject and activity.
 also listing the measurement to loop over them
-'''
+```
 {
   values<-c("bodyaccxmean","bodyaccymean","bodyacczmean","bodygyroxmean","bodygyroymean",
             "bodygyrozmean","observationmean")
@@ -227,9 +227,9 @@ also listing the measurement to loop over them
   measure=vector(mode='character')
   measuremean=vector(mode='numeric')
 }
-'''
+```
 Creating a matrix with the mean of each activity and and subject id, and assigning the corresponding values to each vector
-'''
+```
 {
   counter<-1
   for(value in values){
@@ -245,10 +245,10 @@ Creating a matrix with the mean of each activity and and subject id, and assigni
     }
   }
 }
-'''
+```
 And finally using them to make final dataframe
-'''
+```
 {
 dataframe3<-data.frame(subjectid=subjectid,activity=activity,measure=measure,measuremean=measuremean)
 }
-'''
+```
